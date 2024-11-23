@@ -60,7 +60,7 @@ unsafe extern "C" fn rewrite_plan_state(
         let walker = std::mem::transmute::<PlanstateTreeWalker, _>(rewrite_plan_state);
         pgrx::pg_sys::planstate_tree_walker(node, Some(walker), context)
     }
-    #[cfg(feature = "pg16")]
+    #[cfg(feature = "pg17")]
     {
         let walker = rewrite_plan_state;
         pgrx::pg_sys::planstate_tree_walker_impl(node, Some(walker), context)

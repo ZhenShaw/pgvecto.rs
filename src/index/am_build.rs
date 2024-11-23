@@ -20,7 +20,7 @@ pub unsafe fn build(
 ) {
     #[cfg(any(feature = "pg12", feature = "pg13", feature = "pg14", feature = "pg15"))]
     let oid = (*index).rd_node.relNode;
-    #[cfg(feature = "pg16")]
+    #[cfg(feature = "pg17")]
     let oid = (*index).rd_locator.relNumber;
     let id = Handle::from_sys(oid);
     let options = options(index);
@@ -64,7 +64,7 @@ unsafe extern "C" fn callback(
     (*state.result).index_tuples += 1.0;
 }
 
-#[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg16"))]
+#[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg17"))]
 #[pgrx::pg_guard]
 unsafe extern "C" fn callback(
     index_relation: pgrx::pg_sys::Relation,
@@ -81,7 +81,7 @@ unsafe extern "C" fn callback(
     }
     #[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15"))]
     let oid = (*index_relation).rd_node.relNode;
-    #[cfg(feature = "pg16")]
+    #[cfg(feature = "pg17")]
     let oid = (*index_relation).rd_locator.relNumber;
     let id = Handle::from_sys(oid);
     let vector = from_datum(*values.add(0), *is_null.add(0));

@@ -126,7 +126,7 @@ unsafe fn rewrite_opclass(istmt: *mut pgrx::pg_sys::IndexStmt) {
             if opclass_name.is_null() {
                 continue;
             }
-            #[cfg(any(feature = "pg15", feature = "pg16"))]
+            #[cfg(any(feature = "pg15", feature = "pg17"))]
             let opclass_ptr = (*(opclass_name as *mut pgrx::pg_sys::String)).sval;
             #[cfg(any(feature = "pg12", feature = "pg13", feature = "pg14"))]
             let opclass_ptr = (*(opclass_name as *mut pgrx::pg_sys::Value)).val.str_;
@@ -169,7 +169,7 @@ pub unsafe fn options_from_vec(vec: Vec<*mut pgrx::pg_sys::DefElem>) -> HashMap<
     options
 }
 
-#[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg16"))]
+#[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg17"))]
 pub unsafe fn vec_from_list<T>(l: *mut pgrx::pg_sys::List) -> Vec<*mut T> {
     let mut vec = Vec::new();
     if l.is_null() {

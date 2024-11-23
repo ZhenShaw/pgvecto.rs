@@ -22,7 +22,7 @@ pub unsafe fn init() {
         "".as_pg_cstr(),
         "".as_pg_cstr(),
         None,
-        #[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg16"))]
+        #[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg17"))]
         {
             pgrx::pg_sys::AccessExclusiveLock as pgrx::pg_sys::LOCKMODE
         },
@@ -123,7 +123,7 @@ pub unsafe extern "C" fn amoptions(reloptions: Datum, validate: bool) -> *mut pg
     rdopts as *mut pgrx::pg_sys::bytea
 }
 
-#[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg16"))]
+#[cfg(any(feature = "pg13", feature = "pg14", feature = "pg15", feature = "pg17"))]
 #[pgrx::pg_guard]
 pub unsafe extern "C" fn amoptions(reloptions: Datum, validate: bool) -> *mut pgrx::pg_sys::bytea {
     use pgrx::pg_sys::AsPgCStr;
@@ -207,7 +207,7 @@ pub unsafe extern "C" fn aminsert(
     true
 }
 
-#[cfg(any(feature = "pg14", feature = "pg15", feature = "pg16"))]
+#[cfg(any(feature = "pg14", feature = "pg15", feature = "pg17"))]
 #[pgrx::pg_guard]
 pub unsafe extern "C" fn aminsert(
     index_relation: pgrx::pg_sys::Relation,
@@ -221,7 +221,7 @@ pub unsafe extern "C" fn aminsert(
 ) -> bool {
     #[cfg(any(feature = "pg14", feature = "pg15"))]
     let oid = (*index_relation).rd_node.relNode;
-    #[cfg(feature = "pg16")]
+    #[cfg(feature = "pg17")]
     let oid = (*index_relation).rd_locator.relNumber;
     let id = Handle::from_sys(oid);
     let vector = from_datum(*values.add(0), *is_null.add(0));
@@ -280,7 +280,7 @@ pub unsafe extern "C" fn ambulkdelete(
 ) -> *mut pgrx::pg_sys::IndexBulkDeleteResult {
     #[cfg(any(feature = "pg12", feature = "pg13", feature = "pg14", feature = "pg15"))]
     let oid = (*(*info).index).rd_node.relNode;
-    #[cfg(feature = "pg16")]
+    #[cfg(feature = "pg17")]
     let oid = (*(*info).index).rd_locator.relNumber;
     let id = Handle::from_sys(oid);
     if let Some(callback) = callback {

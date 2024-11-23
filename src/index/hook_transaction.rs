@@ -43,7 +43,7 @@ fn pending_deletes(for_commit: bool) -> Vec<Handle> {
     }
 }
 
-#[cfg(feature = "pg16")]
+#[cfg(feature = "pg17")]
 fn pending_deletes(for_commit: bool) -> Vec<Handle> {
     let mut ptr: *mut pgrx::pg_sys::RelFileLocator = std::ptr::null_mut();
     let n = unsafe { pgrx::pg_sys::smgrGetPendingDeletes(for_commit, &mut ptr as *mut _) };

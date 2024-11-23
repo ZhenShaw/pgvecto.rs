@@ -20,7 +20,7 @@ unsafe extern "C" fn vectors_executor_start(
     }
 }
 
-#[cfg(any(feature = "pg14", feature = "pg15", feature = "pg16"))]
+#[cfg(any(feature = "pg14", feature = "pg15", feature = "pg17"))]
 #[pgrx::pg_guard]
 unsafe extern "C" fn hook_pgvector_compatibility(
     pstmt: *mut pgrx::pg_sys::PlannedStmt,

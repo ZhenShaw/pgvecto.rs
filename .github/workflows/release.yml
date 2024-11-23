@@ -42,12 +42,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - { version: 14, platform: amd64, arch: x86_64 }
-          - { version: 14, platform: arm64, arch: aarch64 }
-          - { version: 15, platform: amd64, arch: x86_64 }
-          - { version: 15, platform: arm64, arch: aarch64 }
-          - { version: 16, platform: amd64, arch: x86_64 }
-          - { version: 16, platform: arm64, arch: aarch64 }
+          - { version: 17, platform: amd64, arch: x86_64 }
     runs-on: ubuntu-20.04
     needs: ["semver"]
     steps:
@@ -83,12 +78,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - { version: 14, platform: amd64, arch: x86_64 }
-          - { version: 14, platform: arm64, arch: aarch64 }
-          - { version: 15, platform: amd64, arch: x86_64 }
-          - { version: 15, platform: arm64, arch: aarch64 }
-          - { version: 16, platform: amd64, arch: x86_64 }
-          - { version: 16, platform: arm64, arch: aarch64 }
+          - { version: 17, platform: amd64, arch: x86_64 }
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -120,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [14, 15, 16]
+        version: [17]
         rootless: [true, false]
     steps:
       - name: Checkout
